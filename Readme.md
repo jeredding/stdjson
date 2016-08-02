@@ -31,18 +31,22 @@ Test and build:
     
 ### Running
 
-    $ stdjson -config examples/ls-rewriter.yaml -- ls -al
-    {"line":"total ..."}
-    ...
-    {"group":"staff","links":1,"name":"Readme.md","perms":"-rw-r--r--","size":725,"time":"Aug  2 19:43","time":"...",user":"njal"}
-    {"group":"staff","links":3,"name":"vendor","perms":"drwxr-xr-x","size":102,"time":"Aug  2 13:31","time":"...","user":"user"}
-    ...
-    $ stdjson -config examples/noop.yaml -- ls -al
-    total ...
-    ...
-    -rw-r--r--   1 user  staff     725 Aug  2 19:43 Readme.md
-    drwxr-xr-x   3 user  staff     102 Aug  2 13:31 vendor
-    ...
+``` json
+$ stdjson -config examples/ls-rewriter.yaml -- ls -al
+{"line":"total ..."}
+...
+{"group":"staff","links":1,"name":"Readme.md","perms":"-rw-r--r--","size":725,"time":"Aug  2 19:43","time":"...","user":"njal"}
+{"group":"staff","links":3,"name":"vendor","perms":"drwxr-xr-x","size":102,"time":"Aug  2 13:31","time":"...","user":"user"}
+...
+```
+``` console
+$ stdjson -config examples/noop.yaml -- ls -al
+total ...
+...
+-rw-r--r--   1 user  staff     725 Aug  2 19:43 Readme.md
+drwxr-xr-x   3 user  staff     102 Aug  2 13:31 vendor
+...
+```
 
 ### License
 
