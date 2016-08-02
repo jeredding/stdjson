@@ -4,7 +4,7 @@ bin: test
 
 .PHONY=get-deps
 get-deps:
-    glide update
+	glide update
 
 .PHONY=test
 test:
