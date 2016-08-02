@@ -1,0 +1,29 @@
+stdout:
+  rewriter:
+    grok:
+      add_timestamp: time
+      named_only: true
+      extra_patterns:
+        - inline:
+            name: "LSTIMESTAMP"
+            pattern: "%{MONTH} +%{MONTHDAY} +%{HOUR}:%{MINUTE}"
+        - inline:
+            name: "CHAR"
+            pattern: "."
+        - inline:
+            name: "PERM"
+            pattern: "[rwx-]"
+        - inline:
+            name: "GROUPPERMS"
+            pattern: "%{PERM}%{PERM}%{PERM}"
+      match_patterns:
+        - '%{NOTSPACE:perms} +%{INT:links:int} +%{NOTSPACE:user} +%{NOTSPACE:group} +%{INT:size:int} +%{LSTIMESTAMP:lstime} +%{GREEDYDATA:name}'
+        - '%{GREEDYDATA:line}'
+      recursive_fields:
+        - field: perms
+          patterns:
+            - "%{CHAR:sticky_perms}%{GROUPPERMS:user_perms}%{GROUPPERMS:group_perms}%{GROUPPERMS:other_perms}"
+      multiline:
+        timeout: 0ms
+        prefix_continuations:
+          - "\t"

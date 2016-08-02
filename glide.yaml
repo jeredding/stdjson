@@ -1,0 +1,7 @@
+package: github.com/nkvoll/stdjson
+import:
+- package: github.com/vjeantet/grok
+- package: github.com/ghodss/yaml
+- package: github.com/cloudfoundry-incubator/candiedyaml
+- package: github.com/smartystreets/goconvey
+- package: github.com/Sirupsen/logrus
