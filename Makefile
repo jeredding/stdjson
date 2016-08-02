@@ -11,4 +11,4 @@ test:
 	go list -f '{{if len .TestGoFiles }}"go test -v -coverprofile={{.Dir}}/.coverprofile {{.ImportPath}}"{{end}}' ./... | grep -v vendor | xargs -n 1 sh -c
 
 fmt:
-	go list ./... | grep -v vendor | xargs -n 1 go fmt
+	go list -f '{{ with $$p := . }}{{ range $$gf := $$p.GoFiles }}{{ $$p.Dir }}/{{ $$gf }}{{ print "\n" }}{{ end }}{{ end }}' ./... | grep -v vendor | xargs -n 1 gofmt -s -w -l

@@ -1,6 +1,6 @@
 ## stdjson
 
-[![Build Status](https://travis-ci.org/nkvoll/stdjson.svg?branch=master)](https://travis-ci.org/nkvoll/stdjson) [![Coverage Status](https://coveralls.io/repos/github/nkvoll/stdjson/badge.svg?branch=master)](https://coveralls.io/github/nkvoll/stdjson?branch=master)
+[![Build Status](https://travis-ci.org/nkvoll/stdjson.svg?branch=master)](https://travis-ci.org/nkvoll/stdjson) [![Coverage Status](https://coveralls.io/repos/github/nkvoll/stdjson/badge.svg?branch=master)](https://coveralls.io/github/nkvoll/stdjson?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/nkvoll/stdjson)](https://goreportcard.com/report/github.com/nkvoll/stdjson) [![codebeat badge](https://codebeat.co/badges/afc287d8-e9fe-47f9-9b61-db14b022604f)](https://codebeat.co/projects/github-com-nkvoll-stdjson)
 
 A wrapper for a subprocess' standard out / standard err that converts the output to JSON.
 

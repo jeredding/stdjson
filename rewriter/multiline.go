@@ -20,7 +20,7 @@ type MultilineBuffer struct {
 	timeout             time.Duration
 }
 
-func NewMultilineReader(c *config.MultilineConfig) *MultilineBuffer {
+func NewMultilineBuffer(c *config.MultilineConfig) *MultilineBuffer {
 	t := c.MustTimeoutDuration()
 	if t == nil {
 		timeout := 10 * time.Millisecond
@@ -69,7 +69,7 @@ func (r *MultilineBuffer) Run() {
 			close(r.inputLines)
 		}()
 
-		for _ = range r.written {
+		for range r.written {
 			for {
 				line, err := r.buffer.ReadString(r.delimiter)
 				if err != nil {

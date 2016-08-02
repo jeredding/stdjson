@@ -13,7 +13,7 @@ func TestMulilineReaderFocus(t *testing.T) {
 
 	FocusConvey("should gather multiple lines", ct, func() {
 		FocusConvey("with no prefix continuations", func(c C) {
-			m := NewMultilineReader(&config.MultilineConfig{StripLastDelimiter: true})
+			m := NewMultilineBuffer(&config.MultilineConfig{StripLastDelimiter: true})
 
 			messages := []string{
 				"this is a message",
@@ -28,7 +28,7 @@ func TestMulilineReaderFocus(t *testing.T) {
 		})
 
 		Convey("with a prefix continuation", func(c C) {
-			m := NewMultilineReader(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" "}})
+			m := NewMultilineBuffer(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" "}})
 
 			testMultiline(
 				c, m,
@@ -38,7 +38,7 @@ func TestMulilineReaderFocus(t *testing.T) {
 		})
 
 		Convey("as a single line when timing out", func(c C) {
-			m := NewMultilineReader(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" "}})
+			m := NewMultilineBuffer(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" "}})
 
 			testMultiline(
 				c, m,
@@ -48,7 +48,7 @@ func TestMulilineReaderFocus(t *testing.T) {
 		})
 
 		Convey("with multiple prefix continuations", func(c C) {
-			m := NewMultilineReader(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" ", ","}})
+			m := NewMultilineBuffer(&config.MultilineConfig{StripLastDelimiter: true, PrefixContinuations: []string{" ", ","}})
 
 			testMultiline(
 				c, m,

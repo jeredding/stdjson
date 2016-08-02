@@ -28,7 +28,7 @@ func NewMultiGrokRewriter(
 	c *config.GrokRewriterConfig) *MultiGrokRewriter {
 	r := &MultiGrokRewriter{
 		out:             out,
-		multiline:       NewMultilineReader(&c.Multiline),
+		multiline:       NewMultilineBuffer(&c.Multiline),
 		g:               g,
 		addTimestamp:    c.AddTimestamp,
 		matchPatterns:   c.MatchPatterns,
