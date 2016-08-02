@@ -1,10 +1,10 @@
 package testutil
 
 import (
+	"bytes"
 	"github.com/Sirupsen/logrus"
 	. "github.com/smartystreets/goconvey/convey"
 	"testing"
-	"bytes"
 )
 
 func TestCapturingTest(t *testing.T) {
