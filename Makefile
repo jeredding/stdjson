@@ -8,4 +8,4 @@ get-deps:
 
 .PHONY=test
 test:
-	go test -v github.com/nkvoll/stdjson/config github.com/nkvoll/stdjson/rewriter github.com/nkvoll/stdjson/testutil github.com/nkvoll/stdjson
+	go list -f '{{if len .TestGoFiles }}"go test -v -coverprofile={{.Dir}}/.coverprofile {{.ImportPath}}"{{end}}' ./... | grep -v vendor | xargs -n 1 sh -c

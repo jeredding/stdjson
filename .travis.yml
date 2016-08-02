@@ -6,7 +6,11 @@ go:
 before_install:
   - mkdir -p $GOPATH/bin
   - curl https://glide.sh/get | sh
+  - go get github.com/mattn/goveralls github.com/modocache/gover
 
 install: make get-deps
 
-script: make
+script:
+  - make
+  - gover
+  - goveralls -coverprofile=gover.coverprofile -service=travis-ci

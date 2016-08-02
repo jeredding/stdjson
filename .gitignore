@@ -1,2 +1,4 @@
 bin/stdjson
 vendor
+.coverprofile
+gover.coverprofile
