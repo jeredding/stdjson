@@ -42,7 +42,10 @@ func (p *Process) Run() error {
 	}()
 
 	sig := make(chan os.Signal)
-	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGSTOP)
+
+	signals := []os.Signal{syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGSTOP}
+	signal.Notify(sig, signals...)
+	defer signal.Reset(signals...)
 
 	for {
 		select {
