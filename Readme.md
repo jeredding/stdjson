@@ -1,5 +1,7 @@
 ## stdjson
 
+[![Build Status](https://travis-ci.org/nkvoll/stdjson.svg?branch=master)](https://travis-ci.org/nkvoll/stdjson)
+
 A wrapper for a subprocess' standard out / standard err that converts the output to JSON.
 
 **Note**: This project is not intended to be production grade at this time, but rather to serve as an small project for the author to get to know [Go](https://golang.org/).
