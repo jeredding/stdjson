@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - 1.6
+
+before_install: curl https://glide.sh/get | sh
+
+install: make get-deps
+
+script: make
