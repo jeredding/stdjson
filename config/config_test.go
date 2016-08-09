@@ -9,9 +9,10 @@ import (
 func TestLoadExamplesConfig(t *testing.T) {
 	Convey("should be able to load default example configurations", t, func() {
 		exampleFiles := []string{
-			"../examples/noop.yaml",
+			"../examples/default-fields.yaml",
 			"../examples/ls-rewriter.yaml",
 			"../examples/ls-advanced.yaml",
+			"../examples/noop.yaml",
 		}
 
 		for _, exampleFile := range exampleFiles {

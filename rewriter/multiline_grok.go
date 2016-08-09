@@ -15,6 +15,7 @@ type MultiGrokRewriter struct {
 	out             io.Writer
 	multiline       *MultilineBuffer
 	g               *grok.Grok
+	defaultFields   map[string]interface{}
 	addTimestamp    *string
 	matchPatterns   []string
 	recursiveFields []config.GrokRewriterRecurseConfig
@@ -30,11 +31,15 @@ func NewMultiGrokRewriter(
 		out:             out,
 		multiline:       NewMultilineBuffer(&c.Multiline),
 		g:               g,
+		defaultFields:   c.DefaultFields,
 		addTimestamp:    c.AddTimestamp,
 		matchPatterns:   c.MatchPatterns,
 		recursiveFields: c.RecursiveFields,
 		whitelistFields: c.WhitelistFields,
 		blacklistFields: c.BlacklistFields,
+	}
+	if r.defaultFields == nil {
+		r.defaultFields = make(map[string]interface{})
 	}
 	return r
 }
@@ -58,7 +63,10 @@ func (r *MultiGrokRewriter) Run() error {
 				return nil
 			}
 
-			res := make(map[string]interface{})
+			res, err := ClonedMap(r.defaultFields)
+			if err != nil {
+				panic(err)
+			}
 
 			r.doGrok(res, line, r.matchPatterns)
 

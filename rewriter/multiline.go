@@ -72,6 +72,7 @@ func (r *MultilineBuffer) Run() {
 		for range r.written {
 			for {
 				line, err := r.buffer.ReadString(r.delimiter)
+
 				if err != nil {
 					if err == io.EOF {
 						break

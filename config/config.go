@@ -27,6 +27,7 @@ type GrokRewriterConfig struct {
 	RecursiveFields []GrokRewriterRecurseConfig `json:"recursive_fields"`
 	WhitelistFields []string                    `json:"whitelist_fields"`
 	BlacklistFields []string                    `json:"blacklist_fields"`
+	DefaultFields   map[string]interface{}      `json:"default_fields"`
 	Multiline       MultilineConfig             `json:"multiline"`
 }
 

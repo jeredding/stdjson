@@ -1,0 +1,15 @@
+stdout:
+  rewriter:
+    grok:
+      default_fields:
+        foo:
+          bar: [baz, 42]
+        facility: 93
+      add_timestamp: time
+      named_only: true
+      match_patterns:
+        - '%{GREEDYDATA:line}'
+      multiline:
+        timeout: 0ms
+        prefix_continuations:
+          - "\t"

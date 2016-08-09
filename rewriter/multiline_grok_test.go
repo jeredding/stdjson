@@ -45,6 +45,13 @@ func TestMultilineGrokRewriter(t *testing.T) {
 			So(b.String(), ShouldContainSubstring, `"time":"`)
 		})
 
+		Convey("should include default fields", func(c C) {
+			conf.DefaultFields = map[string]interface{}{"foo": "bar", "baz": []int{1, 2, 3}}
+			m := NewMultiGrokRewriter(b, g, conf)
+			runRewriter(c, m, []string{"hello"})
+			So(b.String(), ShouldEqual, `{"any":"hello","baz":[1,2,3],"foo":"bar"}`+"\n")
+		})
+
 		Convey("should capture input matching a complexish pattern", func(c C) {
 			conf.MatchPatterns = []string{
 				"%{NOTSPACE:perms} +%{INT:links:int} +%{NOTSPACE:user} +%{NOTSPACE:group} +%{INT:size:int} +%{LSTIMESTAMP:time} +%{GREEDYDATA:name}",

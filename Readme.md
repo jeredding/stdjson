@@ -12,6 +12,7 @@ A wrapper for a subprocess' standard out / standard err that converts the output
 - Wrap stdout / stderr in different rewriters / different configurations.
 - Multiline joining, based on continuation prefixes and a configurable timeout.
 - Recursively match / dice up fields.
+- Adding default fields (arbitrary key/values) for every emitted output object.
 
 ### Building
 
