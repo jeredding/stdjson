@@ -15,7 +15,7 @@ type MultiGrokRewriter struct {
 	out             io.Writer
 	multiline       *MultilineBuffer
 	g               *grok.Grok
-	defaultFields   map[string]interface{}
+	baseObject      []byte
 	addTimestamp    *string
 	matchPatterns   []string
 	recursiveFields []config.GrokRewriterRecurseConfig
@@ -26,22 +26,25 @@ type MultiGrokRewriter struct {
 func NewMultiGrokRewriter(
 	out io.Writer,
 	g *grok.Grok,
-	c *config.GrokRewriterConfig) *MultiGrokRewriter {
+	c *config.GrokRewriterConfig) (*MultiGrokRewriter, error) {
 	r := &MultiGrokRewriter{
 		out:             out,
 		multiline:       NewMultilineBuffer(&c.Multiline),
 		g:               g,
-		defaultFields:   c.DefaultFields,
 		addTimestamp:    c.AddTimestamp,
 		matchPatterns:   c.MatchPatterns,
 		recursiveFields: c.RecursiveFields,
 		whitelistFields: c.WhitelistFields,
 		blacklistFields: c.BlacklistFields,
 	}
-	if r.defaultFields == nil {
-		r.defaultFields = make(map[string]interface{})
+	if c.DefaultFields != nil {
+		bo, err := json.Marshal(c.DefaultFields)
+		if err != nil {
+			return nil, err
+		}
+		r.baseObject = bo
 	}
-	return r
+	return r, nil
 }
 
 func (r *MultiGrokRewriter) Write(b []byte) (n int, err error) {
@@ -63,9 +66,14 @@ func (r *MultiGrokRewriter) Run() error {
 				return nil
 			}
 
-			res, err := ClonedMap(r.defaultFields)
-			if err != nil {
-				panic(err)
+			res := make(map[string]interface{})
+
+			if r.baseObject != nil {
+				err := json.Unmarshal(r.baseObject, &res)
+				if err != nil {
+					panic(err)
+				}
+
 			}
 
 			r.doGrok(res, line, r.matchPatterns)

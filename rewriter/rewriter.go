@@ -36,10 +36,9 @@ func RewriterForStreamConfig(sc *config.StreamConfig, out io.Writer) (Rewriter, 
 			}
 		}
 
-		r := NewMultiGrokRewriter(
+		return NewMultiGrokRewriter(
 			out, g, c,
 		)
-		return r, nil
 	}
 
 	return nil, errors.New("no supported rewriters found")
